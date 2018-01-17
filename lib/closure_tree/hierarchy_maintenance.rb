@@ -56,7 +56,7 @@ module ClosureTree
       _ct.with_advisory_lock do
         delete_hierarchy_references
         if _ct.options[:dependent] == :nullify
-          self.class.find(self.id).children.find_each { |c| c.rebuild! }
+          self.class.unscoped.find(self.id).children.find_each { |c| c.rebuild! }
         end
       end
       true # don't prevent destruction
